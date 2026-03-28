@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Puerto Delfín – Cabañas en Mar de las Pampas</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --arena: #f5efe6;
+    --bosque: #2d4a3e;
+    --bosque-claro: #3d6456;
+    --madera: #8b6f47;
+    --crema: #faf7f2;
+    --texto: #1a1a1a;
+    --texto-suave: #5a5a5a;
+    --acento: #c9a96e;
+    --blanco: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--crema);
+    color: var(--texto);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.4s ease;
+    background: transparent;
+  }
+  nav.scrolled {
+    background: rgba(45, 74, 62, 0.97);
+    padding: 16px 48px;
+    backdrop-filter: blur(10px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--blanco);
+    letter-spacing: 1px;
+  }
+  .nav-logo span { color: var(--acento); }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--acento); }
+  .nav-cta {
+    background: var(--acento);
+    color: var(--bosque) !important;
+    padding: 10px 22px;
+    font-weight: 500 !important;
+    border-radius: 2px;
+  }
+  .nav-cta:hover { background: #e0bb80; color: var(--bosque) !important; }
+
+  /* HERO */
+  .hero {
+    height: 100vh;
+    min-height: 700px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: var(--bosque);
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(45,74,62,0.55) 0%, rgba(45,74,62,0.3) 50%, rgba(45,74,62,0.7) 100%),
+      url('FOTO_HERO.jpg') center/cover;
+    transform: scale(1.05);
+    animation: heroZoom 12s ease-out forwards;
+  }
+  @keyframes heroZoom {
+    from { transform: scale(1.05); }
+    to { transform: scale(1.0); }
+  }
+  .hero-content {
+    position: relative;
+    text-align: center;
+    color: var(--blanco);
+    padding: 0 24px;
+    animation: fadeUp 1.2s ease 0.3s both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--acento);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 96px);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 24px;
+    letter-spacing: -1px;
+  }
+  .hero-title em {
+    font-style: italic;
+    color: var(--acento);
+  }
+  .hero-subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.78);
+    max-width: 480px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary {
+    background: var(--acento);
+    color: var(--bosque);
+    padding: 16px 36px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #e0bb80; transform: translateY(-2px); }
+  .btn-outline {
+    border: 1px solid rgba(255,255,255,0.5);
+    color: var(--blanco);
+    padding: 16px 36px;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.25s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--acento); color: var(--acento); transform: translateY(-2px); }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.5);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    animation: bounce 2s infinite;
+  }
+  .hero-scroll svg { width: 20px; opacity: 0.5; }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+
+  /* INTRO STRIP */
+  .intro-strip {
+    background: var(--bosque);
+    padding: 28px 48px;
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    flex-wrap: wrap;
+  }
+  .intro-stat { text-align: center; color: var(--blanco); }
+  .intro-stat .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--acento);
+  }
+  .intro-stat .label {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-top: 4px;
+  }
+
+  /* SECTION BASE */
+  section { padding: 100px 48px; }
+  .section-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--acento);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 54px);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--bosque);
+    max-width: 600px;
+  }
+  .section-title em { font-style: italic; }
+  .section-lead {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--texto-suave);
+    max-width: 520px;
+    line-height: 1.8;
+    margin-top: 20px;
+  }
+
+  /* CABAÑAS */
+  .cabanas { background: var(--crema); }
+  .cabanas-header { text-align: center; margin-bottom: 64px; }
+  .cabanas-header .section-title { max-width: 100%; }
+  .cabanas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .cabana-card {
+    background: var(--blanco);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .cabana-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 24px 60px rgba(45,74,62,0.15);
+  }
+  .cabana-img {
+    height: 260px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cabana-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .cabana-card:hover .cabana-img img { transform: scale(1.06); }
+  .cabana-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: var(--acento);
+    color: var(--bosque);
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border-radius: 2px;
+  }
+  .cabana-body { padding: 28px 28px 32px; }
+  .cabana-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--bosque);
+    margin-bottom: 8px;
+  }
+  .cabana-desc {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--texto-suave);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .cabana-features {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .cabana-feat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--bosque-claro);
+  }
+  .cabana-feat svg { width: 14px; flex-shrink: 0; }
+  .cabana-cta {
+    display: inline-block;
+    padding: 12px 24px;
+    border: 1px solid var(--bosque);
+    color: var(--bosque);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+  }
+  .cabana-cta:hover { background: var(--bosque); color: var(--blanco); }
+
+  /* SERVICIOS */
+  .servicios { background: var(--bosque); color: var(--blanco); }
+  .servicios .section-title { color: var(--blanco); }
+  .servicios-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+    max-width: 1100px;
+    margin: 48px auto 0;
+  }
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .servicio-item {
+    padding: 24px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 3px;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .servicio-item:hover {
+    border-color: var(--acento);
+    background: rgba(201,169,110,0.06);
+  }
+  .servicio-icon { font-size: 22px; margin-bottom: 12px; }
+  .servicio-name {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    color: var(--blanco);
+    margin-bottom: 4px;
+  }
+  .servicio-detail {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+    font-weight: 300;
+    line-height: 1.6;
+  }
+  .servicios-img { position: sticky; top: 120px; }
+  .servicios-img img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 4px;
+    filter: brightness(0.85);
+  }
+
+  /* GALERIA */
+  .galeria { background: var(--arena); padding: 80px 48px; }
+  .galeria-header { text-align: center; margin-bottom: 48px; }
+  .galeria-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 240px 240px;
+    gap: 12px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .galeria-item { overflow: hidden; border-radius: 3px; cursor: pointer; }
+  .galeria-item:first-child { grid-column: span 2; grid-row: span 2; }
+  .galeria-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .galeria-item:hover img { transform: scale(1.07); }
+
+  /* UBICACION */
+  .ubicacion {
+    background: var(--crema);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+    min-height: 500px;
+  }
+  .ubicacion-text {
+    padding: 80px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .ubicacion-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-top: 32px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(45,74,62,0.12);
+  }
+  .ubicacion-detail-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .ubicacion-detail h4 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--bosque);
+    margin-bottom: 4px;
+  }
+  .ubicacion-detail p {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--texto-suave);
+    line-height: 1.6;
+  }
+  .ubicacion-map { background: var(--bosque-claro); display: flex; align-items: center; justify-content: center; min-height: 500px; position: relative; overflow: hidden; }
+  .map-embed { width: 100%; height: 100%; min-height: 500px; border: none; }
+  .map-overlay {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bosque);
+    color: var(--blanco);
+    padding: 12px 24px;
+    border-radius: 2px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* CONTACTO */
+  .contacto { background: var(--bosque); text-align: center; padding: 100px 48px; }
+  .contacto .section-tag { justify-content: center; display: flex; }
+  .contacto .section-title { color: var(--blanco); margin: 0 auto 16px; text-align: center; max-width: 600px; }
+  .contacto .section-lead { color: rgba(255,255,255,0.6); margin: 0 auto 48px; text-align: center; }
+  .contacto-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; }
+  .btn-wsp {
+    background: #25d366;
+    color: var(--blanco);
+    padding: 18px 40px;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s;
+  }
+  .btn-wsp:hover { background: #20bb5a; transform: translateY(-2px); }
+  .btn-mail {
+    border: 1px solid rgba(255,255,255,0.3);
+    color: var(--blanco);
+    padding: 18px 40px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-decoration: none;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.2s;
+  }
+  .btn-mail:hover { border-color: var(--acento); color: var(--acento); transform: translateY(-2px); }
+  .contacto-divider { width: 1px; height: 80px; background: rgba(255,255,255,0.15); margin: 0 auto 40px; }
+  .contacto-info { font-size: 13px; color: rgba(255,255,255,0.45); letter-spacing: 0.5px; line-height: 1.8; }
+  .contacto-info a { color: var(--acento); text-decoration: none; }
+
+  /* FOOTER */
+  footer {
+    background: #1a2e26;
+    padding: 36px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: rgba(255,255,255,0.7); }
+  .footer-logo span { color: var(--acento); }
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 0.5px; }
+
+  /* ANIMATIONS */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    nav.scrolled { padding: 14px 24px; }
+    .nav-links { display: none; }
+    section { padding: 72px 24px; }
+    .cabanas-grid { grid-template-columns: 1fr; }
+    .servicios-layout { grid-template-columns: 1fr; gap: 48px; }
+    .servicios-img { display: none; }
+    .galeria-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+    .galeria-item:first-child { grid-column: span 2; grid-row: span 1; height: 240px; }
+    .ubicacion { grid-template-columns: 1fr; }
+    .intro-strip { gap: 32px; padding: 24px; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <div class="nav-logo">Puerto <span>Delfín</span></div>
+  <ul class="nav-links">
+    <li><a href="#cabanas">Cabañas</a></li>
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#ubicacion">Ubicación</a></li>
+    <li><a href="#contacto" class="nav-cta">Reservar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Mar de las Pampas · Buenos Aires</p>
+    <h1 class="hero-title">Tu refugio<br>en el <em>bosque</em></h1>
+    <p class="hero-subtitle">Cabañas y lofts rodeados de naturaleza, a pasos del mar. El equilibrio perfecto entre confort y escapada.</p>
+    <div class="hero-btns">
+      <a href="#cabanas" class="btn-primary">Ver Cabañas</a>
+      <a href="#contacto" class="btn-outline">Reservar por WhatsApp</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+    Descubrí
+  </div>
+</section>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip">
+  <div class="intro-stat"><div class="num">3</div><div class="label">Tipos de Cabaña</div></div>
+  <div class="intro-stat"><div class="num">6</div><div class="label">Personas máx. en Loft</div></div>
+  <div class="intro-stat"><div class="num">∞</div><div class="label">Metros de bosque</div></div>
+  <div class="intro-stat"><div class="num">🐾</div><div class="label">Pet Friendly</div></div>
+  <div class="intro-stat"><div class="num">★</div><div class="label">Mejor Precio Directo</div></div>
+</div>
+
+<!-- CABAÑAS -->
+<section class="cabanas" id="cabanas">
+  <div class="cabanas-header reveal">
+    <p class="section-tag">Nuestras unidades</p>
+    <h2 class="section-title">Elegí tu <em>espacio</em> ideal</h2>
+    <p class="section-lead" style="margin: 16px auto 0; text-align:center;">Cada unidad fue diseñada para que te sientas en casa, rodeado del silencio y la paz del bosque serrano costero.</p>
+  </div>
+  <div class="cabanas-grid">
+    <div class="cabana-card reveal reveal-delay-1">
+      <div class="cabana-img">
+        <!-- Reemplazá FOTO_MONO.jpg con tu foto real -->
+        <img src="fotos/monoambiente.jpg" alt="Monoambiente">
+        <span class="cabana-badge">2-3 personas</span>
+      </div>
+      <div class="cabana-body">
+        <h3 class="cabana-name">Monoambiente</h3>
+        <p class="cabana-desc">38 m² de confort para parejas o tríos. Diseño amplio con todo lo que necesitás para descansar.</p>
+        <div class="cabana-features">
+          <span class="cabana-feat">🏠 38 m²</span>
+          <span class="cabana-feat">👥 Hasta 3 pax</span>
+          <span class="cabana-feat">📶 Wi-Fi</span>
+        </div>
+        <a href="#contacto" class="cabana-cta">Consultar</a>
+      </div>
+    </div>
+    <div class="cabana-card reveal reveal-delay-2">
+      <div class="cabana-img">
+        <!-- Reemplazá con tu foto real -->
+        <img src="fotos/dos-ambientes.jpg" alt="Dos ambientes">
+        <span class="cabana-badge">Hasta 4 personas</span>
+      </div>
+      <div class="cabana-body">
+        <h3 class="cabana-name">Dos Ambientes</h3>
+        <p class="cabana-desc">La opción familiar. Planta baja con doble ambiente, 38 m² con espacio para que todos disfruten.</p>
+        <div class="cabana-features">
+          <span class="cabana-feat">🏠 38 m²</span>
+          <span class="cabana-feat">👥 Hasta 4 pax</span>
+          <span class="cabana-feat">🐾 Pet Friendly</span>
+        </div>
+        <a href="#contacto" class="cabana-cta">Consultar</a>
+      </div>
+    </div>
+    <div class="cabana-card reveal reveal-delay-3">
+      <div class="cabana-img">
+        <!-- Reemplazá con tu foto real -->
+        <img src="fotos/loft.jpg" alt="Loft">
+        <span class="cabana-badge">Hasta 6 personas</span>
+      </div>
+      <div class="cabana-body">
+        <h3 class="cabana-name">Loft</h3>
+        <p class="cabana-desc">El espacio más amplio. 53 m² en primer piso con doble altura y luz natural. Ideal para grupos y familias.</p>
+        <div class="cabana-features">
+          <span class="cabana-feat">🏠 53 m²</span>
+          <span class="cabana-feat">👥 Hasta 6 pax</span>
+          <span class="cabana-feat">🌳 Primer piso</span>
+        </div>
+        <a href="#contacto" class="cabana-cta">Consultar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICIOS -->
+<section class="servicios" id="servicios">
+  <div class="servicios-layout">
+    <div>
+      <p class="section-tag">Todo incluido</p>
+      <h2 class="section-title reveal">Un complejo <em>completo</em> para vos</h2>
+      <p class="section-lead reveal">Cada detalle fue pensado para que no te falte nada durante tu estadía en el bosque.</p>
+      <div class="servicios-grid" style="margin-top: 48px;">
+        <div class="servicio-item reveal"><div class="servicio-icon">🏊</div><div class="servicio-name">Piscina al Aire Libre</div><div class="servicio-detail">Templada, habilitada de diciembre a marzo</div></div>
+        <div class="servicio-item reveal reveal-delay-1"><div class="servicio-icon">🍳</div><div class="servicio-name">Desayuno</div><div class="servicio-detail">Desayuno seco incluido en la cabaña</div></div>
+        <div class="servicio-item reveal reveal-delay-2"><div class="servicio-icon">🛁</div><div class="servicio-name">Ropa Blanca</div><div class="servicio-detail">Toallas diarias, sábanas cada 3 días</div></div>
+        <div class="servicio-item reveal reveal-delay-3"><div class="servicio-icon">🧹</div><div class="servicio-name">Limpieza Diaria</div><div class="servicio-detail">Repaso incluido todos los días</div></div>
+        <div class="servicio-item reveal"><div class="servicio-icon">🐾</div><div class="servicio-name">Pet Friendly</div><div class="servicio-detail">Mascotas bienvenidas sin cargo adicional</div></div>
+        <div class="servicio-item reveal reveal-delay-1"><div class="servicio-icon">📶</div><div class="servicio-name">Wi-Fi</div><div class="servicio-detail">Internet en todo el complejo</div></div>
+        <div class="servicio-item reveal reveal-delay-2"><div class="servicio-icon">🎱</div><div class="servicio-name">Playroom</div><div class="servicio-detail">Pool y ping-pong disponibles</div></div>
+        <div class="servicio-item reveal reveal-delay-3"><div class="servicio-icon">🌳</div><div class="servicio-name">Amplio Parque</div><div class="servicio-detail">Gran extensión de parque y bosque</div></div>
+        <div class="servicio-item reveal"><div class="servicio-icon">🚗</div><div class="servicio-name">Estacionamiento</div><div class="servicio-detail">Un espacio por cabaña sobre el frente</div></div>
+        <div class="servicio-item reveal reveal-delay-1"><div class="servicio-icon">🎠</div><div class="servicio-name">Juegos Infantiles</div><div class="servicio-detail">Plaza con metegol y juegos para chicos</div></div>
+      </div>
+    </div>
+    <div class="servicios-img reveal">
+      <!-- Reemplazá con tu foto real -->
+      <img src="fotos/complejo.jpg" alt="Complejo Puerto Delfín">
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section class="galeria" id="galeria">
+  <div class="galeria-header reveal">
+    <p class="section-tag">Galería</p>
+    <h2 class="section-title" style="margin: 0 auto;">El lugar en <em>imágenes</em></h2>
+  </div>
+  <div class="galeria-grid reveal">
+    <!-- Reemplazá las rutas con tus fotos reales -->
+    <div class="galeria-item"><img src="fotos/galeria-1.jpg" alt="Vista principal"></div>
+    <div class="galeria-item"><img src="fotos/galeria-2.jpg" alt="Piscina"></div>
+    <div class="galeria-item"><img src="fotos/galeria-3.jpg" alt="Interior"></div>
+    <div class="galeria-item"><img src="fotos/galeria-4.jpg" alt="Bosque"></div>
+    <div class="galeria-item"><img src="fotos/galeria-5.jpg" alt="Naturaleza"></div>
+  </div>
+</section>
+
+<!-- UBICACION -->
+<div class="ubicacion" id="ubicacion">
+  <div class="ubicacion-text">
+    <p class="section-tag">Cómo llegar</p>
+    <h2 class="section-title reveal">En el corazón de <em>Mar de las Pampas</em></h2>
+    <div class="ubicacion-detail reveal">
+      <div class="ubicacion-detail-icon">📍</div>
+      <div>
+        <h4>Dirección</h4>
+        <p>Delfín esq. Alfonsina Storni<br>Mar de las Pampas, Buenos Aires</p>
+      </div>
+    </div>
+    <div class="ubicacion-detail reveal">
+      <div class="ubicacion-detail-icon">🚌</div>
+      <div>
+        <h4>Cómo llegar</h4>
+        <p>A 80 km al sur de Mar del Plata por la Ruta 11. Acceso directo en auto o bus desde CABA.</p>
+      </div>
+    </div>
+    <div class="ubicacion-detail reveal">
+      <div class="ubicacion-detail-icon">🌊</div>
+      <div>
+        <h4>Entorno</h4>
+        <p>Rodeado de bosque de pinos, a pasos de la playa y el centro de Mar de las Pampas.</p>
+      </div>
+    </div>
+  </div>
+  <div class="ubicacion-map">
+    <iframe class="map-embed"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3184.5!2d-56.9734!3d-37.1945!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzfCsDExJzQwLjIiUyA1NsKwNTgnMjQuMiJX!5e0!3m2!1ses!2sar!4v1"
+      allowfullscreen="" loading="lazy">
+    </iframe>
+    <div class="map-overlay">📍 Puerto Delfín · Mar de las Pampas</div>
+  </div>
+</div>
+
+<!-- CONTACTO -->
+<section class="contacto" id="contacto">
+  <p class="section-tag">¿Querés reservar?</p>
+  <h2 class="section-title">Hablemos y encontramos<br><em>la fecha ideal</em> para vos</h2>
+  <p class="section-lead">Consultá disponibilidad, tarifas y condiciones directamente con nosotros. Garantizamos el mejor precio reservando de forma directa.</p>
+  <div class="contacto-btns">
+    <a href="https://api.whatsapp.com/send?phone=5492235365385&text=Hola!%20Quisiera%20consultar%20disponibilidad%20para%20las%20caba%C3%B1as." class="btn-wsp" target="_blank">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a href="mailto:info@puertodelfin.com" class="btn-mail">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      info@puertodelfin.com
+    </a>
+  </div>
+  <div class="contacto-divider"></div>
+  <p class="contacto-info">
+    Delfín esq. Alfonsina Storni · Mar de las Pampas, Buenos Aires<br>
+    <a href="tel:+5492235365385">+54 9 223 536-5385</a>
+  </p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Puerto <span>Delfín</span></div>
+  <p class="footer-copy">© 2025 Cabañas Puerto Delfín · Mar de las Pampas</p>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
