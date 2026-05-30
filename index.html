@@ -18,6 +18,15 @@ html { scroll-behavior: smooth; }
 body { font-family: 'Inter', sans-serif; background: var(--b); color: var(--t); overflow-x: hidden; line-height: 1; }
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
+/* PLACEHOLDER ELEGANTE (si falta la foto, en vez de imagen rota) */
+.noimg { position: relative; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--c2) 0%, #cdd9df 55%, var(--az) 200%); }
+.noimg::before { content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(45deg, rgba(92,125,143,0.05) 0 16px, transparent 16px 32px); }
+.noimg::after { content: attr(data-label); position: relative; z-index: 1; text-align: center;
+  font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 300;
+  font-size: 16px; letter-spacing: 1px; color: var(--az2); padding: 0 22px; line-height: 1.4; }
+
 /* WSP FLOAT */
 .wsp-float {
   position: fixed; bottom: 24px; right: 24px; z-index: 999;
@@ -52,7 +61,7 @@ nav.solid .nav-links a { color: var(--ts); }
 .hero { height: 100vh; min-height: 660px; position: relative; display: flex; align-items: flex-end; overflow: hidden; }
 .hero-bg {
   position: absolute; inset: 0;
-  background: url('foto4.jpg') center 30%/cover;
+  background: url('foto4.jpg') center 30%/cover, linear-gradient(135deg, #2c4250, #5c7d8f);
   transform: scale(1.05); animation: zoom 16s ease-out forwards;
 }
 .hero-bg::after {
@@ -532,6 +541,17 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); obs.unobserve(e.target); } });
   }, { threshold: 0, rootMargin: '0px 0px -55px 0px' });
   document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+  // Placeholder elegante cuando una foto no carga (en vez de imagen rota)
+  document.querySelectorAll('.cab-img img, .exp-img img, .gi img').forEach(img => {
+    const fallback = () => {
+      const wrap = img.closest('.cab-img, .exp-img, .gi');
+      if (wrap) { wrap.classList.add('noimg'); wrap.setAttribute('data-label', img.alt || 'Puerto Delfín'); }
+      img.style.display = 'none';
+    };
+    if (img.complete && img.naturalWidth === 0) fallback();
+    img.addEventListener('error', fallback);
+  });
 </script>
 </body>
 </html>
