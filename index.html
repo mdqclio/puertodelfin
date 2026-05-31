@@ -434,7 +434,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 <div class="nums">
   <div class="num-item r"><b>50m</b><span>de la playa</span></div>
   <div class="num-item r d1"><b>4,94★</b><span>en Airbnb</span></div>
-  <div class="num-item r d2"><b>9</b><span>años como anfitriones</span></div>
+  <div class="num-item r d2"><b>4,5★</b><span>en Google</span></div>
   <div class="num-item r d3"><b>365</b><span>días al año</span></div>
 </div>
 
@@ -585,7 +585,8 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   <div class="rev-kpi r">
     <div class="kpi"><b>4,94★</b><span>de 5 en Airbnb</span></div>
     <div class="kpi"><b>16</b><span>evaluaciones</span></div>
-    <div class="kpi"><b>9</b><span>años como anfitriones</span></div>
+    <div class="kpi"><b>4,5★</b><span>en Google</span></div>
+    <div class="kpi"><b>406</b><span>opiniones Google</span></div>
   </div>
   <div class="rev-badges r">
     <span class="rev-badge">🏅 Superanfitrión de Airbnb</span>
@@ -641,7 +642,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
     <p class="ubic-intro">Mar de las Pampas es el destino más exclusivo de la costa atlántica argentina. Sin ruido, sin multitudes. Nosotros estamos justo en el centro.</p>
     <div class="ubic-rows">
       <div class="ubic-row r"><span class="ubic-icon">📍</span><p><strong>Delfín y Alfonsina Storni</strong>Mar de las Pampas, Buenos Aires</p></div>
-      <div class="ubic-row r"><span class="ubic-icon">🌊</span><p><strong>50 metros de la playa</strong>Caminás y llegás — sin auto, sin transporte</p></div>
+      <div class="ubic-row r"><span class="ubic-icon">🌊</span><p><strong>a 50 metros de la playa</strong>Caminás y llegás — sin auto, sin transporte</p></div>
       <div class="ubic-row r"><span class="ubic-icon">🏪</span><p><strong>300m del centro</strong>Restaurantes, tiendas, gastronomía local</p></div>
       <div class="ubic-row r"><span class="ubic-icon">🚗</span><p><strong>400 km desde CABA</strong>Ruta 2 o Ruta 11 · Bus directo disponible</p></div>
     </div>
@@ -705,14 +706,8 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
     }, { threshold: 0.05 }).observe(heroSection);
   }
 
-  // Scroll suave con offset por el nav fijo
-  const SCROLL_OFFSET = 76;
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const t = document.querySelector(a.getAttribute('href'));
-      if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - SCROLL_OFFSET, behavior: 'smooth' }); }
-    });
-  });
+  // Scroll suave: 100% nativo (html{scroll-behavior:smooth} + scroll-margin-top en
+  // las secciones). Sin handler sobre los anclas: nada intercepta la navegación.
 
   // Menú hamburguesa (móvil)
   const navToggle = document.getElementById('navToggle');
