@@ -114,6 +114,7 @@
   --wsp: #25d366; --wsp2: #1da851;  /* verde WhatsApp — solo botones de acción */
 }
 html { scroll-behavior: smooth; }
+#cabanas, #galeria, #opiniones, #ubicacion { scroll-margin-top: 88px; }
 body { font-family: 'Inter', sans-serif; background: var(--b); color: var(--t); overflow-x: hidden; line-height: 1; }
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .icon { width: 18px; height: 18px; flex-shrink: 0; fill: currentColor; }
@@ -126,8 +127,11 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   font-size: 13px; font-weight: 600; text-decoration: none;
   box-shadow: 0 6px 28px rgba(37,211,102,0.45);
   animation: pulse 2.5s infinite;
+  opacity: 0; visibility: hidden; transform: translateY(12px); pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
 }
-.wsp-float:hover { background: var(--wsp2); transform: translateY(-2px); }
+.wsp-float.show { opacity: 1; visibility: visible; transform: none; pointer-events: auto; }
+.wsp-float.show:hover { background: var(--wsp2); transform: translateY(-2px); }
 @keyframes pulse { 0%,100%{box-shadow:0 6px 28px rgba(37,211,102,0.45)} 50%{box-shadow:0 6px 40px rgba(37,211,102,0.65)} }
 .wsp-float .icon { width: 20px; height: 20px; }
 
@@ -269,12 +273,14 @@ nav.solid .nav-toggle span { background: var(--az2); }
 .kpi:last-child { border: none; }
 .kpi b { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--az); display: block; }
 .kpi span { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--ts); }
-.rev-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1100px; margin: 0 auto 48px; }
-.rev-card { background: var(--c); padding: 32px; border-top: 2px solid var(--az); }
-.rev-stars { color: #f0a500; font-size: 13px; letter-spacing: 2px; margin-bottom: 14px; }
-.rev-text { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; font-style: italic; color: var(--t); line-height: 1.65; margin-bottom: 18px; }
-.rev-who { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--t); }
-.rev-meta { font-size: 10px; color: var(--az); margin-top: 3px; letter-spacing: 0.5px; }
+.rev-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; max-width: 1140px; margin: 0 auto 52px; }
+.rev-card { background: #fff; border: 1px solid var(--sep); border-top: 2px solid var(--az); padding: 34px 32px; display: flex; flex-direction: column; transition: box-shadow 0.3s, transform 0.3s; }
+.rev-card:hover { box-shadow: 0 18px 44px rgba(91,126,153,0.13); transform: translateY(-3px); }
+.rev-quote { font-family: 'Cormorant Garamond', serif; font-size: 54px; line-height: 0.5; color: var(--az); opacity: 0.35; margin-bottom: 10px; }
+.rev-text { font-family: 'Cormorant Garamond', serif; font-size: 19px; font-weight: 300; font-style: italic; color: var(--t); line-height: 1.5; margin-bottom: 24px; flex: 1; }
+.rev-foot { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; border-top: 1px solid var(--sep); padding-top: 16px; }
+.rev-who { font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: var(--t); }
+.rev-src { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--az); font-weight: 500; white-space: nowrap; }
 .rev-cta { text-align: center; }
 .rev-cta a { display: inline-flex; align-items: center; gap: 10px; background: var(--wsp); color: #fff; padding: 16px 40px; font-size: 13px; font-weight: 600; text-decoration: none; border-radius: 2px; transition: all 0.25s; }
 .rev-cta a:hover { background: var(--wsp2); transform: translateY(-2px); }
@@ -573,8 +579,8 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 <!-- ⑤ REVIEWS -->
 <section class="reviews-sec" id="opiniones">
   <div class="rev-top r">
-    <span class="lbl">opiniones reales · airbnb</span>
-    <h2 class="h2">No lo decimos nosotros.<br>Lo dicen <em>en Airbnb.</em></h2>
+    <span class="lbl">opiniones reales · google + airbnb</span>
+    <h2 class="h2">No lo decimos nosotros.<br>Lo dicen <em>los huéspedes.</em></h2>
   </div>
   <div class="rev-kpi r">
     <div class="kpi"><b>4,94★</b><span>de 5 en Airbnb</span></div>
@@ -586,6 +592,38 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
     <span class="rev-badge">❤️ Favorito entre huéspedes</span>
   </div>
   <p class="rev-disclaimer r">Calificación de 4,94 sobre 5 en base a 16 evaluaciones reales de huéspedes en Airbnb. Somos Superanfitriones y el alojamiento tiene la distinción “Favorito entre huéspedes”, que Airbnb otorga solo a los lugares mejor valorados de la plataforma.</p>
+  <div class="rev-grid">
+    <article class="rev-card r">
+      <div class="rev-quote" aria-hidden="true">“</div>
+      <p class="rev-text">Excelente atención, la cabaña impecable, muy cerca de la playa, la verdad que un 10/10.</p>
+      <div class="rev-foot"><span class="rev-who">Carlos M.</span><span class="rev-src">Airbnb · Enero 2026</span></div>
+    </article>
+    <article class="rev-card r d1">
+      <div class="rev-quote" aria-hidden="true">“</div>
+      <p class="rev-text">Muy buena la ubicación, a metros de la playa. A la zona comercial se accede caminando. Dan reposeras para llevar a la costa. El lugar es limpio y prolijo. Todo funciona bien.</p>
+      <div class="rev-foot"><span class="rev-who">Matías J.</span><span class="rev-src">Airbnb · Enero 2026</span></div>
+    </article>
+    <article class="rev-card r d2">
+      <div class="rev-quote" aria-hidden="true">“</div>
+      <p class="rev-text">Las cabañas están en una ubicación muy buena, cerca de la playa, en una zona tranquila, muy cerca del centro de Mar de las Pampas. La habitación tenía todo lo necesario: heladera, cocina, parrilla, utensilios. Ideal para descansar.</p>
+      <div class="rev-foot"><span class="rev-who">Javier</span><span class="rev-src">Airbnb · Diciembre 2025</span></div>
+    </article>
+    <article class="rev-card r">
+      <div class="rev-quote" aria-hidden="true">“</div>
+      <p class="rev-text">Nuestra estadía en Puerto Delfín fue espectacular. El complejo tiene salida al mar, a una playa súper tranquila que no se llena de gente. La atención, siempre atentos a lo que necesitáramos. ¡Súper recomendable!</p>
+      <div class="rev-foot"><span class="rev-who">Agustina O.</span><span class="rev-src">Google · Enero 2026</span></div>
+    </article>
+    <article class="rev-card r d1">
+      <div class="rev-quote" aria-hidden="true">“</div>
+      <p class="rev-text">Sin dudas un lugar para volver siempre. El complejo cómodo, completo y funcional, parque e instalaciones de uso compartido limpio y prolijo. Ubicación inmejorable para ir con niños.</p>
+      <div class="rev-foot"><span class="rev-who">Pau T.</span><span class="rev-src">Google · Febrero 2026</span></div>
+    </article>
+    <article class="rev-card r d2">
+      <div class="rev-quote" aria-hidden="true">“</div>
+      <p class="rev-text">¡Excelente ubicación! Súper para relajar y disfrutar del mar. Gracias por la amabilidad. ¡Volveremos!</p>
+      <div class="rev-foot"><span class="rev-who">Daiana N.</span><span class="rev-src">Google · Marzo 2026</span></div>
+    </article>
+  </div>
   <div class="rev-cta r">
     <a href="https://api.whatsapp.com/send?phone=5492235365385&text=Hola!%20Le%C3%AD%20las%20opiniones%20y%20quiero%20reservar.%20%C2%BFTienen%20disponibilidad?" target="_blank" rel="noopener">
       <svg class="icon" aria-hidden="true"><use href="#ic-wa"/></svg>
@@ -657,25 +695,38 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => nav.classList.toggle('solid', window.scrollY > 60));
 
-  // Menú móvil
-  const toggle = document.getElementById('navToggle');
-  const links = document.getElementById('navLinks');
-  toggle.addEventListener('click', () => {
-    const open = links.classList.toggle('open');
-    toggle.setAttribute('aria-expanded', open);
-  });
-  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    links.classList.remove('open');
-    toggle.setAttribute('aria-expanded', false);
-  }));
+  // Botón flotante de WhatsApp: oculto mientras el hero está en pantalla,
+  // fade-in al salir de él (así nunca coexiste con el CTA del hero)
+  const heroSection = document.getElementById('inicio');
+  const wspFloat = document.querySelector('.wsp-float');
+  if (heroSection && wspFloat) {
+    new IntersectionObserver(([e]) => {
+      wspFloat.classList.toggle('show', !e.isIntersecting);
+    }, { threshold: 0.05 }).observe(heroSection);
+  }
 
   // Scroll suave con offset por el nav fijo
+  const SCROLL_OFFSET = 76;
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', e => {
       const t = document.querySelector(a.getAttribute('href'));
-      if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - 76, behavior: 'smooth' }); }
+      if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + scrollY - SCROLL_OFFSET, behavior: 'smooth' }); }
     });
   });
+
+  // Menú hamburguesa (móvil)
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+    }));
+  }
 
   // Reveal al hacer scroll
   const obs = new IntersectionObserver(entries => {
