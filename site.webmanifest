@@ -1,0 +1,12 @@
+{
+  "name": "Puerto Delfín · Cabañas en Mar de las Pampas",
+  "short_name": "Puerto Delfín",
+  "description": "Cabañas en Mar de las Pampas a 50 metros del mar. Bosque, silencio y pileta.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F5F2EE",
+  "theme_color": "#3E5C73",
+  "icons": [
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
