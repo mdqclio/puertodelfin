@@ -692,6 +692,13 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 </div>
 
 <script>
+  // Al entrar, arrancar en el tope (sin restaurar el scroll previo del browser).
+  // Si la URL trae un #ancla, respetamos el deep-link y no forzamos el tope.
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  window.addEventListener('load', function () {
+    if (!location.hash) window.scrollTo(0, 0);
+  });
+
   // Nav sólido al hacer scroll
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => nav.classList.toggle('solid', window.scrollY > 60));
