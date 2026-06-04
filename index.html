@@ -863,6 +863,14 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   }
   var convId = "web__" + idExterno;
 
+  // --- device (calculado una vez al cargar) ---
+  var device = (function () {
+    var ua = navigator.userAgent || "";
+    var uaMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|BlackBerry|webOS|Mobile/i.test(ua);
+    var smallScreen = (window.innerWidth || document.documentElement.clientWidth || 0) <= 768;
+    return (uaMobile || smallScreen) ? "mobile" : "desktop";
+  })();
+
   // --- state ---
   var fbMessages = [];        // [{rol, texto, ts}] desde Firebase (fuente del hilo)
   var pendingUser = null;     // mensaje del usuario optimista, hasta que vuelve por la suscripción
@@ -995,7 +1003,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
       var res = await fetch(ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ idExterno: idExterno, texto: texto })
+        body: JSON.stringify({ idExterno: idExterno, texto: texto, device: device })
       });
       if (!res.ok) throw new Error("HTTP " + res.status);
       // La respuesta del bot ya NO se pinta acá: llega por Firebase.
