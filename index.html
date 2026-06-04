@@ -916,7 +916,12 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
       t.textContent = "escribiendo…";
       listEl.appendChild(t);
     }
-    if (paused) {
+    // cartel de pausa: solo si está pausada Y el último mensaje del hilo es del usuario
+    // (cuando llega un bot/operador por Firebase, el último deja de ser user -> se oculta)
+    var lastIsUser = pendingUser
+      ? true
+      : (fbMessages.length ? fbMessages[fbMessages.length - 1].rol === "user" : false);
+    if (paused && lastIsUser) {
       var n = document.createElement("div");
       n.className = "pd-note";
       n.textContent = "Un agente te va a responder en breve 🙌";
