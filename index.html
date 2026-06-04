@@ -750,7 +750,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   #pd-chat {
     --pd-accent: #0a7ea4;
     --pd-accent-dark: #086684;
-    position: fixed; right: 20px; bottom: 20px; z-index: 99999;
+    position: fixed; right: 20px; top: 84px; z-index: 99999;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
   /* floating bubble */
@@ -765,8 +765,8 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 
   /* panel */
   #pd-panel {
-    position: absolute; right: 0; bottom: 74px;
-    width: 340px; max-width: calc(100vw - 32px); height: 480px; max-height: calc(100vh - 110px);
+    position: absolute; right: 0; top: 74px;
+    width: 340px; max-width: calc(100vw - 32px); height: 480px; max-height: calc(100vh - 170px);
     background: #fff; border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.22);
     display: none; flex-direction: column; overflow: hidden;
   }
@@ -804,8 +804,8 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   #pd-send:disabled { opacity: .5; cursor: default; }
 
   @media (max-width: 480px) {
-    #pd-chat { right: 12px; bottom: 12px; }
-    #pd-panel { width: calc(100vw - 24px); height: calc(100vh - 90px); bottom: 70px; }
+    #pd-chat { right: 12px; top: 70px; }
+    #pd-panel { width: calc(100vw - 24px); height: calc(100vh - 150px); top: 70px; }
   }
 </style>
 
