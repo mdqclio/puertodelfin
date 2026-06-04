@@ -793,6 +793,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   .pd-msg.user { align-self: flex-end; background: var(--pd-accent); color: #fff; border-bottom-right-radius: 4px; }
   .pd-msg.error { align-self: flex-start; background: #fdecea; color: #9b1c1c; border: 1px solid #f5c6c2; }
   .pd-typing { align-self: flex-start; color: #888; font-size: 13px; font-style: italic; padding: 4px 6px; }
+  .pd-note { align-self: center; color: #6b7a82; background: #eef3f5; border: 1px solid #dce6ea; border-radius: 10px; font-size: 12px; padding: 6px 12px; text-align: center; }
 
   #pd-inputbar { flex: 0 0 auto; display: flex; gap: 8px; padding: 10px; border-top: 1px solid #e3e8eb; background: #fff; }
   #pd-input {
@@ -836,6 +837,10 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   </div>
 </div>
 
+<!-- ===== Firebase SDK (compat) — fuente en vivo del hilo ===== -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+
 <!-- ===== Widget logic (vanilla, addEventListener only) ===== -->
 <script>
 (function () {
@@ -844,6 +849,11 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   var ENDPOINT = "https://automation.alulahostel.com.ar/webhook/puerto-delfin-bot-web";
   var SESSION_KEY = "pd_chat_session";
   var GREETING = "¡Hola! Soy el asistente de Puerto Delfín 🐬 ¿En qué te ayudo?";
+  var FB_CONFIG = {
+    apiKey: "AIzaSyAfn7KLZ39d9kwA98X9pkLd5yc73tK-BVY",
+    databaseURL: "https://botcontrol-base-default-rtdb.firebaseio.com",
+    projectId: "botcontrol-base"
+  };
 
   // --- session id (persisted) ---
   var idExterno = localStorage.getItem(SESSION_KEY);
@@ -851,10 +861,15 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
     idExterno = crypto.randomUUID();
     localStorage.setItem(SESSION_KEY, idExterno);
   }
+  var convId = "web__" + idExterno;
 
   // --- state ---
-  var messages = [];      // {rol:'user'|'bot'|'error', texto}
-  var greeted = false;
+  var fbMessages = [];        // [{rol, texto, ts}] desde Firebase (fuente del hilo)
+  var pendingUser = null;     // mensaje del usuario optimista, hasta que vuelve por la suscripción
+  var awaiting = false;       // esperando respuesta del bot -> muestra "escribiendo…"
+  var awaitingSince = 0;      // ts del último envío (para detectar respuesta nueva)
+  var paused = false;         // POST devolvió paused:true -> cartelito de operador
+  var lastError = "";         // error transitorio de conexión (hasta el próximo envío)
   var sending = false;
 
   // --- elements ---
@@ -865,43 +880,97 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   var inputEl  = document.getElementById("pd-input");
   var sendBtn  = document.getElementById("pd-send");
 
+  // --- Firebase init + ref ---
+  var msgRef = null;
+  try {
+    if (typeof firebase !== "undefined" && firebase.initializeApp) {
+      if (!firebase.apps || !firebase.apps.length) firebase.initializeApp(FB_CONFIG);
+      msgRef = firebase.database().ref("clientes/puerto-delfin/mensajes/" + convId);
+    } else {
+      console.warn("[pd-chat] Firebase SDK no disponible; el hilo en vivo queda deshabilitado.");
+    }
+  } catch (e) {
+    console.error("[pd-chat] error inicializando Firebase:", e);
+  }
+
   function scrollDown() { listEl.scrollTop = listEl.scrollHeight; }
 
-  function renderMsg(rol, texto) {
+  function appendMsg(rol, texto) {
     var div = document.createElement("div");
     div.className = "pd-msg " + rol;
     div.textContent = texto;
     listEl.appendChild(div);
+  }
+
+  // Re-render completo del hilo (Firebase es la fuente de verdad)
+  function renderThread() {
+    listEl.innerHTML = "";
+    appendMsg("bot", GREETING);
+    fbMessages.forEach(function (m) {
+      appendMsg(m.rol === "user" ? "user" : "bot", m.texto); // bot y operador van a la izquierda
+    });
+    if (pendingUser) appendMsg("user", pendingUser.texto);
+    if (awaiting && !paused) {
+      var t = document.createElement("div");
+      t.className = "pd-typing";
+      t.textContent = "escribiendo…";
+      listEl.appendChild(t);
+    }
+    if (paused) {
+      var n = document.createElement("div");
+      n.className = "pd-note";
+      n.textContent = "Un agente te va a responder en breve 🙌";
+      listEl.appendChild(n);
+    }
+    if (lastError) appendMsg("error", lastError);
     scrollDown();
   }
 
-  function addMessage(rol, texto) {
-    messages.push({ rol: rol, texto: texto });
-    renderMsg(rol, texto);
-  }
+  // --- suscripción en vivo a Firebase ---
+  var fbHandler = null;
+  function onSnapshot(snap) {
+    var val = (snap && snap.val()) || {};
+    fbMessages = Object.keys(val)
+      .map(function (k) { return val[k]; })
+      .filter(function (m) { return m && typeof m.texto === "string"; })
+      .sort(function (a, b) { return (a.ts || 0) - (b.ts || 0); });
 
-  function showTyping() {
-    var t = document.createElement("div");
-    t.className = "pd-typing";
-    t.id = "pd-typing";
-    t.textContent = "escribiendo…";
-    listEl.appendChild(t);
-    scrollDown();
+    // dedup: si el mensaje del usuario ya llegó por Firebase, soltamos el optimista
+    if (pendingUser && fbMessages.some(function (m) {
+      return m.rol === "user" && m.texto === pendingUser.texto;
+    })) {
+      pendingUser = null;
+    }
+    // si llegó una respuesta nueva del bot/operador, cortamos el "escribiendo…"
+    if (awaiting && fbMessages.some(function (m) {
+      return m.rol !== "user" && (m.ts || 0) >= awaitingSince;
+    })) {
+      awaiting = false;
+    }
+    renderThread();
   }
-  function hideTyping() {
-    var t = document.getElementById("pd-typing");
-    if (t) t.remove();
+  function onSnapshotError(err) {
+    console.error("[pd-chat] Firebase read error:", err && err.code, err);
+    // PERMISSION_DENIED => la regla de lectura pública todavía no está
+  }
+  function attach() {
+    if (!msgRef || fbHandler) return;
+    fbHandler = msgRef.on("value", onSnapshot, onSnapshotError);
+  }
+  function detach() {
+    if (msgRef && fbHandler) { msgRef.off("value", fbHandler); fbHandler = null; }
   }
 
   function openPanel() {
     chat.classList.add("pd-open");
-    if (!greeted) {
-      addMessage("bot", GREETING);
-      greeted = true;
-    }
+    attach();
+    renderThread();
     inputEl.focus();
   }
-  function closePanel() { chat.classList.remove("pd-open"); }
+  function closePanel() {
+    chat.classList.remove("pd-open");
+    detach(); // sin leaks
+  }
 
   async function send() {
     var texto = inputEl.value.trim();
@@ -910,8 +979,12 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
     sending = true;
     sendBtn.disabled = true;
     inputEl.value = "";
-    addMessage("user", texto);
-    showTyping();
+    lastError = "";
+    paused = false;
+    awaitingSince = Date.now();
+    awaiting = true;
+    pendingUser = { texto: texto, ts: awaitingSince }; // optimista
+    renderThread();
 
     try {
       var res = await fetch(ENDPOINT, {
@@ -919,17 +992,19 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ idExterno: idExterno, texto: texto })
       });
-      hideTyping();
       if (!res.ok) throw new Error("HTTP " + res.status);
-      var data = await res.json();
-      addMessage("bot", data.reply || "(sin respuesta)");
+      // La respuesta del bot ya NO se pinta acá: llega por Firebase.
+      var data = {};
+      try { data = await res.json(); } catch (e) { data = {}; }
+      if (data && data.paused) { paused = true; awaiting = false; }
     } catch (err) {
-      hideTyping();
-      addMessage("error", "No pude conectar, probá de nuevo en un momento");
+      lastError = "No pude conectar, probá de nuevo en un momento";
+      awaiting = false;
       console.error("[pd-chat] error al enviar:", err);
     } finally {
       sending = false;
       sendBtn.disabled = false;
+      renderThread();
       inputEl.focus();
     }
   }
@@ -946,6 +1021,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 
   // expose session id for debugging/tests
   window.__pdSession = function () { return idExterno; };
+  window.__pdConvId = function () { return convId; };
 })();
 </script>
 </body>
