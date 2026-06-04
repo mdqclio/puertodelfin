@@ -903,10 +903,32 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 
   function scrollDown() { listEl.scrollTop = listEl.scrollHeight; }
 
+  // Escapa HTML del texto (viene del LLM): & < > " ' -> entidades
+  function escapeHtml(s) {
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  // Sobre el texto YA escapado, envuelve URLs http/https en <a>.
+  // Captura la URL completa (incluye query string); la puntuación
+  // final pegada (.,;:!?)]) queda afuera del link.
+  function linkify(texto) {
+    return escapeHtml(texto).replace(/https?:\/\/[^\s]+/g, function (url) {
+      var trail = "";
+      var m = url.match(/[.,;:!?)\]]+$/);
+      if (m) { trail = m[0]; url = url.slice(0, url.length - trail.length); }
+      return '<a href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + "</a>" + trail;
+    });
+  }
+
   function appendMsg(rol, texto) {
     var div = document.createElement("div");
     div.className = "pd-msg " + rol;
-    div.textContent = texto;
+    div.innerHTML = linkify(texto);
     listEl.appendChild(div);
   }
 
