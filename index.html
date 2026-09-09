@@ -208,6 +208,10 @@ nav.solid .nav-toggle span { background: var(--az2); }
 .cab-img { height: 320px; overflow: hidden; position: relative; }
 .cab-img img { filter: saturate(0.97); transition: transform 0.6s, filter 0.6s; }
 .cab-card:hover .cab-img img { transform: scale(1.04); filter: brightness(1) saturate(1); }
+.cab-thumbs { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; margin-top: 4px; }
+.cab-thumb { height: 76px; overflow: hidden; cursor: zoom-in; }
+.cab-thumb img { filter: saturate(0.95); transition: transform 0.5s, filter 0.5s; }
+.cab-thumb:hover img { transform: scale(1.07); filter: brightness(1.03) saturate(1); }
 .cab-tag { position: absolute; top: 16px; left: 16px; background: #fff; color: var(--az); font-size: 9px; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; }
 .cab-body { padding: 28px 28px 32px; flex: 1; display: flex; flex-direction: column; }
 .cab-name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 300; color: var(--t); margin-bottom: 8px; }
@@ -358,6 +362,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   .num-item{flex:1 1 50%;border-right:none;border-bottom:1px solid var(--sep);}
   .cabanas,.reviews-sec,.galeria{padding:64px 20px;}
   .cab-grid{grid-template-columns:1fr;}
+  .cab-thumb{height:92px;}
   .experiencia{grid-template-columns:1fr;}
   .exp-img{height:280px;}
   .exp-text{padding:48px 24px;}
@@ -449,20 +454,24 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 
     <article class="cab-card r">
       <div class="cab-img">
-        <picture>
-          <source type="image/webp" srcset="fotos/webp/IMG_0394.webp">
-          <img src="fotos/IMG_0394.jpg" alt="Cabaña Refugio de Mar para 2 a 3 personas en Mar de las Pampas" width="1179" height="1463" loading="lazy" decoding="async">
-        </picture>
+        <img src="fotos/webp/refugio-01.webp" alt="Interior del Refugio de Mar en Mar de las Pampas: monoambiente con techo a dos aguas y hogar a leños" width="1126" height="2000" loading="lazy" decoding="async">
         <span class="cab-tag">2 – 3 personas</span>
+      </div>
+      <div class="cab-thumbs">
+        <div class="cab-thumb"><img src="fotos/webp/refugio-02.webp" alt="Refugio de Mar en Mar de las Pampas: monoambiente con mesa, estantería divisoria y cama" width="960" height="1280" loading="lazy" decoding="async"></div>
+        <div class="cab-thumb"><img src="fotos/webp/refugio-03.webp" alt="Deck de acceso al Refugio de Mar en Mar de las Pampas, con pérgola y muro de piedra" width="960" height="1280" loading="lazy" decoding="async"></div>
+        <div class="cab-thumb"><img src="fotos/webp/refugio-04.webp" alt="Cocina del Refugio de Mar en Mar de las Pampas bajo el techo a dos aguas" width="1126" height="2000" loading="lazy" decoding="async"></div>
+        <div class="cab-thumb"><img src="fotos/webp/refugio-05.webp" alt="Zona de descanso del Refugio de Mar en Mar de las Pampas con ventana al bosque" width="960" height="1280" loading="lazy" decoding="async"></div>
       </div>
       <div class="cab-body">
         <h3 class="cab-name">Refugio de Mar</h3>
-        <p class="cab-desc">38 m² de confort total. Cocina equipada, hogar a leños, baño con bañera y deck privado con parrilla. Para una pareja que quiere estar en su mundo.</p>
+        <p class="cab-desc">Son cuatro cabañas iguales, de 38 m² en planta baja. Funcionan como monoambiente: cocina, living y camas comparten un mismo espacio que se abre hacia arriba, con el techo a dos aguas a la vista y la luz cayendo desde la cumbrera. Hogar a leños, baño con bañera y deck propio con parrilla.</p>
         <div class="cab-specs">
-          <span class="cab-spec">🏠 38 m²</span>
+          <span class="cab-spec">🏠 38 m² monoambiente</span>
           <span class="cab-spec">👥 2-3 personas</span>
           <span class="cab-spec">🔥 Hogar a leños</span>
           <span class="cab-spec">🍖 Parrilla propia</span>
+          <span class="cab-spec">✦ 4 unidades</span>
         </div>
         <p class="cab-price">Precio: <strong>consultá por WhatsApp</strong></p>
         <a href="https://api.whatsapp.com/send?phone=5492235365385&text=Hola!%20Me%20interesa%20el%20Refugio%20de%20Mar%20de%20Puerto%20Delf%C3%ADn.%20%C2%BFTienen%20disponibilidad%20y%20cu%C3%A1l%20es%20el%20precio?" class="cab-cta" target="_blank" rel="noopener">
@@ -474,20 +483,24 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 
     <article class="cab-card r d1">
       <div class="cab-img">
-        <picture>
-          <source type="image/webp" srcset="fotos/webp/IMG_0390.webp">
-          <img src="fotos/IMG_0390.jpg" alt="Cabaña de Mar para hasta 4 personas, pet friendly, en Mar de las Pampas" width="1179" height="1468" loading="lazy" decoding="async">
-        </picture>
+        <img src="fotos/webp/cabana-01.webp" alt="Living comedor de la Cabaña de Mar en Mar de las Pampas con luz natural" width="1200" height="1600" loading="lazy" decoding="async">
         <span class="cab-tag">Hasta 4 personas</span>
+      </div>
+      <div class="cab-thumbs">
+        <div class="cab-thumb"><img src="fotos/webp/cabana-02.webp" alt="Dormitorio separado de la Cabaña de Mar en Mar de las Pampas" width="960" height="1280" loading="lazy" decoding="async"></div>
+        <div class="cab-thumb"><img src="fotos/webp/cabana-03.webp" alt="Frente de la Cabaña de Mar en Mar de las Pampas con chimenea de piedra" width="960" height="1280" loading="lazy" decoding="async"></div>
+        <div class="cab-thumb"><img src="fotos/webp/cabana-04.webp" alt="Estar con hogar a leños de la Cabaña de Mar en Mar de las Pampas" width="960" height="1280" loading="lazy" decoding="async"></div>
+        <div class="cab-thumb"><img src="fotos/webp/cabana-05.webp" alt="Pileta del complejo vista desde el deck de la Cabaña de Mar en Mar de las Pampas" width="960" height="1280" loading="lazy" decoding="async"></div>
       </div>
       <div class="cab-body">
         <h3 class="cab-name">Cabaña de Mar</h3>
-        <p class="cab-desc">38 m² con habitación independiente en planta baja. Dos televisores, calefacción central. La opción ideal para familia o dos parejas con privacidad.</p>
+        <p class="cab-desc">También son cuatro unidades, y miden los mismos 38 m² que el Refugio. Lo que cambia es el plano: acá el dormitorio es un cuarto aparte, con su puerta, separado del living y la cocina. Duermen cuatro sin que todos tengan que apagar la luz a la misma hora.</p>
         <div class="cab-specs">
           <span class="cab-spec">🏠 38 m²</span>
+          <span class="cab-spec">🚪 Dormitorio separado</span>
           <span class="cab-spec">👥 hasta 4</span>
           <span class="cab-spec">🐾 Pet friendly</span>
-          <span class="cab-spec">📺 2 TV</span>
+          <span class="cab-spec">✦ 4 unidades</span>
         </div>
         <p class="cab-price">Precio: <strong>consultá por WhatsApp</strong></p>
         <a href="https://api.whatsapp.com/send?phone=5492235365385&text=Hola!%20Me%20interesa%20la%20Caba%C3%B1a%20de%20Mar%20de%20Puerto%20Delf%C3%ADn.%20%C2%BFTienen%20disponibilidad%20y%20cu%C3%A1l%20es%20el%20precio?" class="cab-cta" target="_blank" rel="noopener">
@@ -499,20 +512,25 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 
     <article class="cab-card r d2">
       <div class="cab-img">
-        <picture>
-          <source type="image/webp" srcset="fotos/webp/IMG_0386.webp">
-          <img src="fotos/IMG_0386.jpg" alt="Casa de Mar para hasta 6 personas con deck amplio en Mar de las Pampas" width="1179" height="1460" loading="lazy" decoding="async">
-        </picture>
+        <img src="fotos/webp/casa-01.webp" alt="Comedor y entrepiso de la Casa de Mar en Mar de las Pampas, con doble altura" width="900" height="1600" loading="lazy" decoding="async">
         <span class="cab-tag">Hasta 6 personas</span>
+      </div>
+      <div class="cab-thumbs">
+        <div class="cab-thumb"><img src="fotos/webp/casa-02.webp" alt="Entrepiso con tres camas de la Casa de Mar en Mar de las Pampas" width="960" height="1280" loading="lazy" decoding="async"></div>
+        <div class="cab-thumb"><img src="fotos/webp/casa-03.webp" alt="Frente en dos plantas de la Casa de Mar en Mar de las Pampas" width="960" height="1280" loading="lazy" decoding="async"></div>
+        <div class="cab-thumb"><img src="fotos/webp/casa-04.webp" alt="Vista desde el entrepiso hacia el comedor de la Casa de Mar en Mar de las Pampas" width="900" height="1600" loading="lazy" decoding="async"></div>
+        <div class="cab-thumb"><img src="fotos/webp/casa-05.webp" alt="Dormitorio de la Casa de Mar en Mar de las Pampas con vigas a la vista" width="900" height="1600" loading="lazy" decoding="async"></div>
+        <div class="cab-thumb"><img src="fotos/webp/casa-06.webp" alt="Parque del complejo visto desde la Casa de Mar en Mar de las Pampas" width="900" height="1600" loading="lazy" decoding="async"></div>
       </div>
       <div class="cab-body">
         <h3 class="cab-name">Casa de Mar</h3>
-        <p class="cab-desc">53 m² en primer piso con doble altura y luz natural. El espacio más amplio del complejo. Para grupos o familias que quieren lo mejor sin resignar nada.</p>
+        <p class="cab-desc">Cuatro unidades de 53 m², las más amplias del complejo. Están en primer piso y se desarrollan en dos plantas: abajo cocina, comedor y hogar bajo doble altura; arriba, por escalera de madera, un entrepiso con camas que mira sobre todo el ambiente. Deck propio con vista al parque.</p>
         <div class="cab-specs">
           <span class="cab-spec">🏠 53 m²</span>
+          <span class="cab-spec">🪜 2 plantas</span>
           <span class="cab-spec">👥 hasta 6</span>
-          <span class="cab-spec">☀️ Deck amplio</span>
           <span class="cab-spec">🌳 1er piso</span>
+          <span class="cab-spec">✦ 4 unidades</span>
         </div>
         <p class="cab-price">Precio: <strong>consultá por WhatsApp</strong></p>
         <a href="https://api.whatsapp.com/send?phone=5492235365385&text=Hola!%20Me%20interesa%20la%20Casa%20de%20Mar%20de%20Puerto%20Delf%C3%ADn.%20%C2%BFTienen%20disponibilidad%20y%20cu%C3%A1l%20es%20el%20precio?" class="cab-cta" target="_blank" rel="noopener">
@@ -738,7 +756,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 
   // Lightbox de galería
   const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg');
-  document.querySelectorAll('.gi').forEach(g => {
+  document.querySelectorAll('.gi, .cab-thumb').forEach(g => {
     g.addEventListener('click', () => {
       const img = g.querySelector('img');
       lbImg.src = img.currentSrc || img.src;
