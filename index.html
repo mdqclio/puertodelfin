@@ -136,24 +136,24 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .wsp-float .icon { width: 20px; height: 20px; }
 
 /* NAV */
-nav {
+#nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   padding: 22px 48px; display: flex; justify-content: space-between; align-items: center;
   transition: all 0.4s;
 }
-nav.solid { background: rgba(253,251,248,0.97); padding: 14px 48px; border-bottom: 1px solid var(--sep); backdrop-filter: blur(10px); }
+#nav.solid { background: rgba(253,251,248,0.97); padding: 14px 48px; border-bottom: 1px solid var(--sep); backdrop-filter: blur(10px); }
 .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: #fff; letter-spacing: 1.5px; text-decoration: none; transition: color 0.4s; }
 .nav-brand small { display: block; font-family: 'Inter', sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.6; margin-top: 2px; font-weight: 300; }
-nav.solid .nav-brand { color: var(--az2); }
+#nav.solid .nav-brand { color: var(--az2); }
 .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
 .nav-links a { color: rgba(255,255,255,0.78); text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; transition: color 0.2s; }
-nav.solid .nav-links a { color: var(--ts); }
+#nav.solid .nav-links a { color: var(--ts); }
 .nav-links a:hover { color: var(--az) !important; }
 .nav-wsp { background: var(--wsp) !important; color: #fff !important; padding: 9px 20px; border-radius: 2px; font-weight: 500 !important; }
 .nav-wsp:hover { background: var(--wsp2) !important; }
 .nav-toggle { display: none; background: none; border: none; cursor: pointer; width: 30px; height: 24px; padding: 0; z-index: 101; }
 .nav-toggle span { display: block; height: 2px; width: 100%; background: #fff; margin: 6px 0; border-radius: 2px; transition: all 0.3s; }
-nav.solid .nav-toggle span { background: var(--az2); }
+#nav.solid .nav-toggle span { background: var(--az2); }
 
 /* HERO */
 .hero { height: 100vh; min-height: 660px; position: relative; display: flex; align-items: flex-end; overflow: hidden; }
@@ -205,7 +205,7 @@ nav.solid .nav-toggle span { background: var(--az2); }
 .cab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1180px; margin: 0 auto; }
 .cab-card { background: var(--b); border: 1px solid var(--sep); display: flex; flex-direction: column; transition: box-shadow 0.35s, transform 0.35s; }
 .cab-card:hover { box-shadow: 0 22px 56px rgba(91,126,153,0.18); transform: translateY(-4px); z-index: 2; position: relative; }
-.cab-img { height: 320px; overflow: hidden; position: relative; }
+.cab-img { height: 320px; overflow: hidden; position: relative; cursor: zoom-in; }
 .cab-img img { filter: saturate(0.97); transition: transform 0.6s, filter 0.6s; }
 .cab-card:hover .cab-img img { transform: scale(1.04); filter: brightness(1) saturate(1); }
 .cab-thumbs { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 4px; margin-top: 4px; }
@@ -338,6 +338,10 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 .lb img { width: auto; height: auto; max-width: 95%; max-height: 90%; object-fit: contain; border-radius: 2px; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
 .lb-close { position: absolute; top: 18px; right: 28px; color: #fff; font-size: 42px; line-height: 1; cursor: pointer; opacity: 0.8; }
 .lb-close:hover { opacity: 1; }
+.lb-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 52px; height: 72px; border: none; background: rgba(255,255,255,0.10); color: #fff; font-size: 34px; line-height: 1; cursor: pointer; opacity: 0.75; transition: opacity 0.2s, background 0.2s; }
+.lb-nav:hover { opacity: 1; background: rgba(255,255,255,0.20); }
+.lb-prev { left: 18px; } .lb-next { right: 18px; }
+.lb-count { position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,0.65); font-size: 11px; letter-spacing: 2px; }
 
 /* REVEAL */
 .r { opacity: 0; transform: translateY(22px); transition: opacity 0.85s ease, transform 0.85s ease; }
@@ -346,7 +350,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 
 /* MOBILE */
 @media(max-width:900px){
-  nav{padding:16px 20px;} nav.solid{padding:12px 20px;}
+  #nav{padding:16px 20px;} #nav.solid{padding:12px 20px;}
   .nav-toggle{display:block;}
   .nav-links{
     position:fixed; top:0; right:0; height:100vh; width:78%; max-width:320px;
@@ -377,6 +381,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   footer{flex-direction:column;text-align:center;padding:32px 20px;}
   .foot-links{flex-wrap:wrap;justify-content:center;}
   .wsp-float{bottom:16px;right:16px;}
+  .lb-nav{width:44px;height:60px;font-size:28px;} .lb-prev{left:6px;} .lb-next{right:6px;}
 }
 </style>
 </head>
@@ -706,7 +711,10 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 <!-- LIGHTBOX -->
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
   <span class="lb-close" id="lbClose" aria-label="Cerrar">&times;</span>
+  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Imagen anterior">&#8249;</button>
   <img id="lbImg" src="" alt="">
+  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Imagen siguiente">&#8250;</button>
+  <span class="lb-count" id="lbCount" aria-hidden="true"></span>
 </div>
 
 <script>
@@ -754,19 +762,55 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   }, { threshold: 0, rootMargin: '0px 0px -55px 0px' });
   document.querySelectorAll('.r').forEach(el => obs.observe(el));
 
-  // Lightbox de galería
+  // Lightbox: galería + fichas, con navegación dentro del set abierto
   const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg');
-  document.querySelectorAll('.gi, .cab-thumb').forEach(g => {
-    g.addEventListener('click', () => {
-      const img = g.querySelector('img');
-      lbImg.src = img.currentSrc || img.src;
-      lbImg.alt = img.alt;
-      lb.classList.add('open');
-    });
+  const lbPrev = document.getElementById('lbPrev'), lbNext = document.getElementById('lbNext');
+  const lbCount = document.getElementById('lbCount');
+
+  // Un set por galería y uno por ficha (principal + miniaturas, en orden)
+  const groups = [];
+  const addGroup = imgs => { if (imgs.length) groups.push(imgs); };
+  addGroup([...document.querySelectorAll('.gal-grid .gi img')]);
+  document.querySelectorAll('.cab-card').forEach(card =>
+    addGroup([...card.querySelectorAll('.cab-img img, .cab-thumb img')]));
+
+  let group = null, idx = 0;
+  const show = i => {
+    if (!group) return;
+    idx = (i + group.length) % group.length;
+    const im = group[idx];
+    lbImg.src = im.currentSrc || im.src;
+    lbImg.alt = im.alt;
+    const solo = group.length < 2;
+    lbPrev.hidden = lbNext.hidden = solo;
+    lbCount.textContent = solo ? '' : (idx + 1) + ' / ' + group.length;
+  };
+  groups.forEach(g => g.forEach((im, i) => {
+    const trigger = im.closest('.gi, .cab-img, .cab-thumb');
+    if (trigger) trigger.addEventListener('click', () => { group = g; show(i); lb.classList.add('open'); });
+  }));
+
+  const closeLb = () => { lb.classList.remove('open'); group = null; };
+  const step = n => e => { e.stopPropagation(); show(idx + n); };
+  lbPrev.addEventListener('click', step(-1));
+  lbNext.addEventListener('click', step(1));
+
+  let swiped = false;
+  lb.addEventListener('click', () => { if (swiped) { swiped = false; return; } closeLb(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLb();
+    else if (e.key === 'ArrowLeft') show(idx - 1);
+    else if (e.key === 'ArrowRight') show(idx + 1);
   });
-  const closeLb = () => lb.classList.remove('open');
-  lb.addEventListener('click', closeLb);
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+  let tx = 0, ty = 0;
+  lb.addEventListener('touchstart', e => {
+    tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY;
+  }, { passive: true });
+  lb.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx, dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) { swiped = true; show(idx + (dx < 0 ? 1 : -1)); }
+  }, { passive: true });
 </script>
 
 <!-- ===== Puerto Delfín chat widget ===== -->
