@@ -104,3 +104,14 @@ de los que la página cargaba ~4,5 MB). Peso por encima del pliegue: hero 204 KB
   adapto para leer del staging.
 - Los originales siguen en `~/staging-fotos/` (fuera del repo). No los toqué.
 - `docs/auditoria/puertodelfin.md` sigue sin trackear; no lo incluí en ningún commit.
+
+## Addendum (mismo día) — hero revertido al anterior
+
+Por pedido de Leonardo, el hero vuelve a ser la foto anterior (`IMG_0399.jpg`, 1179×1446,
+las Casas de Mar desde el parque). Recuperada con `git show d52ddc9~1:fotos/IMG_0399.jpg`,
+convertida a `fotos/webp/hero.webp` (cwebp q78, sin metadata, 186 KB) pisando la de
+cabana-10. `og-image.jpg` regenerado desde este hero (franja y 380–999, 1179×619 → 1200×630,
+escala ≈1:1, 149 KB). `<img>` del hero con `width="1179" height="1446"` y el alt anterior.
+Ninguna otra foto ni el JSON-LD (más allá de que `"image"` sigue apuntando a `hero.webp` y
+`og-image.jpg`, que cambiaron de contenido, no de ruta) fueron tocados. La foto de cabana-10
+(`…22-11-04`) queda fuera de la web.
