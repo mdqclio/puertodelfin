@@ -65,9 +65,12 @@
   "priceRange": "$$",
   "currenciesAccepted": "ARS",
   "petsAllowed": true,
-  "numberOfRooms": 3,
+  "numberOfRooms": 12,
   "checkinTime": "14:00",
   "checkoutTime": "10:00",
+  "sameAs": [
+    "https://api.whatsapp.com/send?phone=5492235365385"
+  ],
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "Delfín y Alfonsina Storni",
@@ -85,9 +88,36 @@
     { "@type": "LocationFeatureSpecification", "name": "Pileta", "value": true },
     { "@type": "LocationFeatureSpecification", "name": "Parrilla", "value": true },
     { "@type": "LocationFeatureSpecification", "name": "Hogar a leña", "value": true },
-    { "@type": "LocationFeatureSpecification", "name": "Cocina equipada", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Cocina con horno y 4 hornallas", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Microondas", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "TV 32''", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Wi-Fi", "value": true },
+    { "@type": "LocationFeatureSpecification", "name": "Estacionamiento", "value": true },
     { "@type": "LocationFeatureSpecification", "name": "Admite mascotas", "value": true },
     { "@type": "LocationFeatureSpecification", "name": "Calefacción", "value": true }
+  ],
+  "containsPlace": [
+    {
+      "@type": "Accommodation",
+      "name": "Refugio de Mar",
+      "description": "Monoambiente. Unidades en planta baja y en planta alta con techo a dos aguas.",
+      "occupancy": { "@type": "QuantitativeValue", "minValue": 2, "maxValue": 3 },
+      "floorSize": { "@type": "QuantitativeValue", "value": 38, "unitCode": "MTK" }
+    },
+    {
+      "@type": "Accommodation",
+      "name": "Cabaña de Mar",
+      "description": "Dormitorio separado, planta baja, cerca de la pileta.",
+      "occupancy": { "@type": "QuantitativeValue", "maxValue": 4 },
+      "floorSize": { "@type": "QuantitativeValue", "value": 38, "unitCode": "MTK" }
+    },
+    {
+      "@type": "Accommodation",
+      "name": "Casa de Mar",
+      "description": "Dos pisos, en primer piso, la más amplia.",
+      "occupancy": { "@type": "QuantitativeValue", "maxValue": 6 },
+      "floorSize": { "@type": "QuantitativeValue", "value": 53, "unitCode": "MTK" }
+    }
   ],
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
@@ -95,6 +125,87 @@
     "opens": "00:00",
     "closes": "23:59"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "@id": "https://www.puertodelfin.com/#preguntas",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿A cuánto está la playa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A 50 metros, caminando."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Aceptan mascotas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, de cualquier tamaño y sin costo extra. Solo pedimos que se porten bien y que respetes a los demás huéspedes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Para cuántas personas son las cabañas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Son 12 cabañas en 3 tipologías: Refugio de Mar para 2–3 personas, Cabaña de Mar hasta 4 y Casa de Mar hasta 6."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué diferencia hay entre Refugio, Cabaña y Casa de Mar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Refugio: monoambiente de 38 m². Cabaña: 38 m² con dormitorio separado. Casa: 53 m² en dos pisos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Horarios de check-in y check-out?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Check-in a partir de las 14:00 y check-out hasta las 10:00."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hay Wi-Fi?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, en todas las cabañas. Igual, Puerto Delfín es un lugar para desconectar: si necesitás trabajar con conexión estable, escribinos antes de reservar y te contamos cómo está el servicio en la zona."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hay estacionamiento?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí, podés dejar el auto en la puerta del complejo, sin cargo. Es al aire libre, no cubierto."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué equipamiento tienen las cabañas?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Parrilla, hogar a leña, cocina con horno y 4 hornallas, microondas, TV 32'' y Wi-Fi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cómo reservo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Por WhatsApp, directo con nosotros y sin intermediarios. Respondemos en menos de 1 hora."
+      }
+    }
+  ]
 }
 </script>
 
@@ -114,7 +225,7 @@
   --wsp: #25d366; --wsp2: #1da851;  /* verde WhatsApp — solo botones de acción */
 }
 html { scroll-behavior: smooth; overflow-x: hidden; }
-#cabanas, #galeria, #opiniones, #ubicacion { scroll-margin-top: 88px; }
+#cabanas, #galeria, #opiniones, #preguntas, #ubicacion { scroll-margin-top: 88px; }
 body { font-family: 'Inter', sans-serif; background: var(--b); color: var(--t); overflow-x: hidden; line-height: 1; }
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .icon { width: 18px; height: 18px; flex-shrink: 0; fill: currentColor; }
@@ -161,15 +272,17 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .hero-bg img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; transform: scale(1.05); animation: zoom 16s ease-out forwards; }
 .hero::after {
   content: ''; position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(to top, rgba(20,16,12,0.82) 0%, rgba(20,16,12,0.25) 55%, rgba(20,16,12,0.08) 100%);
+  background: linear-gradient(to top, rgba(20,16,12,0.82) 0%, rgba(20,16,12,0.38) 55%, rgba(20,16,12,0.10) 100%);
 }
 @keyframes zoom { from{transform:scale(1.05)} to{transform:scale(1)} }
-.hero-body { position: relative; z-index: 2; padding: 0 72px 88px; max-width: 720px; animation: up 1.2s ease 0.4s both; }
+.hero-body { position: relative; z-index: 2; padding: 0 72px 88px; max-width: 940px; animation: up 1.2s ease 0.4s both; }
 @keyframes up { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
 .hero-tag { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.58); font-weight: 300; margin-bottom: 18px; display: flex; align-items: center; gap: 12px; }
 .hero-tag::before { content:''; display:inline-block; width:28px; height:1px; background:rgba(255,255,255,0.4); }
-.hero-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(46px, 6.8vw, 84px); font-weight: 300; line-height: 1.04; color: #fff; margin-bottom: 16px; }
-.hero-h1 em { font-style: italic; }
+.hero-h1, .hero-claim { font-family: 'Cormorant Garamond', serif; font-size: clamp(46px, 6.8vw, 84px); font-weight: 300; line-height: 1.04; color: #fff; }
+.hero-h1 { margin-bottom: 8px; }
+.hero-claim { margin-bottom: 16px; }
+.hero-h1 em, .hero-claim em { font-style: italic; }
 .hero-price { font-size: 14px; font-weight: 300; color: rgba(255,255,255,0.65); margin-bottom: 28px; letter-spacing: 0.5px; }
 .hero-price strong { color: rgba(255,255,255,0.9); font-weight: 500; font-size: 16px; }
 .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
@@ -202,6 +315,9 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .cab-header { text-align: center; margin-bottom: 64px; }
 .cab-header .h2 { max-width: 100%; }
 .cab-sub { font-size: 14px; font-weight: 300; color: var(--ts); margin-top: 14px; }
+.cab-fact { font-size: 13px; font-weight: 400; color: var(--t); margin-top: 10px; letter-spacing: 0.3px; }
+.cab-equip { max-width: 720px; margin: 48px auto 0; text-align: center; border-top: 1px solid var(--sep); padding-top: 28px; font-size: 13px; font-weight: 300; color: var(--ts); line-height: 1.8; }
+.cab-equip strong { color: var(--t); font-weight: 500; }
 .cab-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; max-width: 1180px; margin: 0 auto; }
 .cab-card { background: var(--b); border: 1px solid var(--sep); display: flex; flex-direction: column; transition: box-shadow 0.35s, transform 0.35s; }
 .cab-card:hover { box-shadow: 0 22px 56px rgba(91,126,153,0.18); transform: translateY(-4px); z-index: 2; position: relative; }
@@ -293,6 +409,19 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
 .rev-badge { display: inline-flex; align-items: center; gap: 8px; background: var(--c); border: 1px solid var(--sep); color: var(--t); font-size: 12px; font-weight: 500; letter-spacing: 0.3px; padding: 11px 20px; border-radius: 50px; }
 .rev-disclaimer { max-width: 640px; margin: 0 auto 44px; text-align: center; font-size: 12px; font-weight: 300; line-height: 1.75; color: var(--ts); }
 
+/* FAQ */
+.faq { background: var(--c); padding: 100px 56px; }
+.faq-top { text-align: center; margin-bottom: 44px; }
+.faq-list { max-width: 760px; margin: 0 auto; border-top: 1px solid var(--sep); }
+.faq-item { border-bottom: 1px solid var(--sep); }
+.faq-item summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 22px 0; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--t); line-height: 1.25; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: '+'; flex-shrink: 0; font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 300; color: var(--az); transition: transform 0.25s; }
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item summary:hover { color: var(--az2); }
+.faq-item p { font-size: 14px; font-weight: 300; color: var(--ts); line-height: 1.8; padding: 0 36px 24px 0; }
+.faq-item p a { color: var(--az); text-decoration: underline; text-underline-offset: 3px; }
+
 /* UBICACIÓN */
 .ubicacion { display: grid; grid-template-columns: 1fr 1fr; min-height: 500px; }
 .ubic-left { background: var(--g); padding: 72px 64px; display: flex; flex-direction: column; justify-content: center; }
@@ -348,6 +477,9 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 .r.on { opacity: 1; transform: none; }
 .d1{transition-delay:.1s} .d2{transition-delay:.2s} .d3{transition-delay:.3s}
 
+/* NAV compacto entre 900 y 1100px (6 ítems) */
+@media(max-width:1100px){ .nav-links{gap:22px;} }
+
 /* MOBILE */
 @media(max-width:900px){
   #nav{padding:16px 20px;} #nav.solid{padding:12px 20px;}
@@ -364,7 +496,9 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   .hero-body{padding:0 24px 56px;}
   .nums{flex-wrap:wrap;}
   .num-item{flex:1 1 50%;border-right:none;border-bottom:1px solid var(--sep);}
-  .cabanas,.reviews-sec,.galeria{padding:64px 20px;}
+  .cabanas,.reviews-sec,.galeria,.faq{padding:64px 20px;}
+  .faq-item summary{font-size:19px;}
+  .faq-item p{padding-right:0;}
   .cab-grid{grid-template-columns:1fr;}
   .cab-thumb{height:92px;}
   .experiencia{grid-template-columns:1fr;}
@@ -407,6 +541,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
     <li><a href="#cabanas">Cabañas</a></li>
     <li><a href="#galeria">Galería</a></li>
     <li><a href="#opiniones">Opiniones</a></li>
+    <li><a href="#preguntas">Preguntas</a></li>
     <li><a href="#ubicacion">Ubicación</a></li>
     <li><a href="https://api.whatsapp.com/send?phone=5492235365385&text=Hola!%20Quiero%20reservar." target="_blank" rel="noopener" class="nav-wsp">Reservar</a></li>
   </ul>
@@ -419,7 +554,8 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   </div>
   <div class="hero-body">
     <p class="hero-tag">Mar de las Pampas · A 50m del mar · Abierto todo el año</p>
-    <h1 class="hero-h1">El lujo de<br><em>no hacer nada.</em></h1>
+    <h1 class="hero-h1">Cabañas en Mar de las Pampas, a 50&nbsp;m del mar</h1>
+    <p class="hero-claim">El lujo de<br><em>no hacer nada.</em></p>
     <p class="hero-price">Cabañas desde <strong>consultá precio directo</strong> · sin intermediarios · sin recargo</p>
     <div class="hero-actions">
       <a href="https://api.whatsapp.com/send?phone=5492235365385&text=Hola!%20Vi%20la%20web%20y%20quisiera%20saber%20disponibilidad%20y%20precios%20para%20mis%20fechas." class="btn-wsp" target="_blank" rel="noopener">
@@ -440,7 +576,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 <!-- NÚMEROS -->
 <div class="nums">
   <div class="num-item r"><b>50m</b><span>de la playa</span></div>
-  <div class="num-item r d1"><b>4,94★</b><span>en Airbnb</span></div>
+  <div class="num-item r d1"><b>4,87★</b><span>en Airbnb</span></div>
   <div class="num-item r d2"><b>4,5★</b><span>en Google</span></div>
   <div class="num-item r d3"><b>365</b><span>días al año</span></div>
 </div>
@@ -451,6 +587,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
     <span class="lbl">elegí tu cabaña</span>
     <h2 class="h2">No es una cabaña.<br>Es un <em>permiso.</em></h2>
     <p class="cab-sub">El permiso de apagar el teléfono, dormir hasta tarde y no tener nada pendiente.</p>
+    <p class="cab-fact">12 cabañas en 3 tipologías, para 2 a 6 personas.</p>
   </div>
   <div class="cab-grid">
 
@@ -525,10 +662,10 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
       </div>
       <div class="cab-body">
         <h3 class="cab-name">Casa de Mar</h3>
-        <p class="cab-desc">Cuatro unidades de 53 m², las más amplias del complejo. Están en primer piso y se desarrollan en dos plantas: abajo cocina, comedor y hogar bajo doble altura; arriba, por escalera de madera, un entrepiso con camas que mira sobre todo el ambiente. Deck propio con vista al parque.</p>
+        <p class="cab-desc">Cuatro unidades de 53 m², las más amplias del complejo. Están en primer piso y se desarrollan en dos pisos: abajo cocina, comedor y hogar bajo doble altura; arriba, por escalera de madera, un entrepiso con camas que mira sobre todo el ambiente. Deck propio con vista al parque.</p>
         <div class="cab-specs">
           <span class="cab-spec">🏠 53 m²</span>
-          <span class="cab-spec">🪜 2 plantas</span>
+          <span class="cab-spec">🪜 Dos pisos</span>
           <span class="cab-spec">👥 hasta 6</span>
           <span class="cab-spec">🌳 1er piso</span>
           <span class="cab-spec">✦ 4 unidades</span>
@@ -542,6 +679,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
     </article>
 
   </div>
+  <p class="cab-equip r"><strong>Todas con parrilla, hogar a leña, cocina con horno y 4 hornallas, microondas y TV 32''.</strong> Wi-Fi en todas las cabañas.<br>Mascotas bienvenidas, de cualquier tamaño y sin costo extra.</p>
 </section>
 
 <!-- MID CTA -->
@@ -599,7 +737,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
     <h2 class="h2">No lo decimos nosotros.<br>Lo dicen <em>los huéspedes.</em></h2>
   </div>
   <div class="rev-kpi r">
-    <div class="kpi"><b>4,94★</b><span>de 5 en Airbnb</span></div>
+    <div class="kpi"><b>4,87★</b><span>de 5 en Airbnb</span></div>
     <div class="kpi"><b>16</b><span>evaluaciones</span></div>
     <div class="kpi"><b>4,5★</b><span>en Google</span></div>
     <div class="kpi"><b>406</b><span>opiniones Google</span></div>
@@ -608,7 +746,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
     <span class="rev-badge">🏅 Superanfitrión de Airbnb</span>
     <span class="rev-badge">❤️ Favorito entre huéspedes</span>
   </div>
-  <p class="rev-disclaimer r">Calificación de 4,94 sobre 5 en base a 16 evaluaciones reales de huéspedes en Airbnb. Somos Superanfitriones y el alojamiento tiene la distinción “Favorito entre huéspedes”, que Airbnb otorga solo a los lugares mejor valorados de la plataforma.</p>
+  <p class="rev-disclaimer r">Calificación de 4,87 sobre 5 en base a 16 evaluaciones reales de huéspedes en Airbnb. Somos Superanfitriones y el alojamiento tiene la distinción “Favorito entre huéspedes”, que Airbnb otorga solo a los lugares mejor valorados de la plataforma.</p>
   <div class="rev-grid">
     <article class="rev-card r">
       <div class="rev-quote" aria-hidden="true">“</div>
@@ -650,7 +788,53 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   </div>
 </section>
 
-<!-- ⑥ UBICACIÓN -->
+<!-- ⑥ PREGUNTAS FRECUENTES -->
+<section class="faq" id="preguntas">
+  <div class="faq-top r">
+    <span class="lbl">preguntas frecuentes</span>
+    <h2 class="h2">Lo que nos preguntan<br>antes de <em>reservar.</em></h2>
+  </div>
+  <div class="faq-list r">
+    <details class="faq-item">
+      <summary>¿A cuánto está la playa?</summary>
+      <p>A 50 metros, caminando.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Aceptan mascotas?</summary>
+      <p>Sí, de cualquier tamaño y sin costo extra. Solo pedimos que se porten bien y que respetes a los demás huéspedes.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Para cuántas personas son las cabañas?</summary>
+      <p>Son 12 cabañas en 3 tipologías: Refugio de Mar para 2–3 personas, Cabaña de Mar hasta 4 y Casa de Mar hasta 6.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Qué diferencia hay entre Refugio, Cabaña y Casa de Mar?</summary>
+      <p>Refugio: monoambiente de 38 m². Cabaña: 38 m² con dormitorio separado. Casa: 53 m² en dos pisos.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Horarios de check-in y check-out?</summary>
+      <p>Check-in a partir de las 14:00 y check-out hasta las 10:00.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Hay Wi-Fi?</summary>
+      <p>Sí, en todas las cabañas. Igual, Puerto Delfín es un lugar para desconectar: si necesitás trabajar con conexión estable, <a href="https://api.whatsapp.com/send?phone=5492235365385&text=Hola!%20Quiero%20saber%20c%C3%B3mo%20est%C3%A1%20el%20Wi-Fi%20antes%20de%20reservar." target="_blank" rel="noopener">escribinos antes de reservar</a> y te contamos cómo está el servicio en la zona.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Hay estacionamiento?</summary>
+      <p>Sí, podés dejar el auto en la puerta del complejo, sin cargo. Es al aire libre, no cubierto.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Qué equipamiento tienen las cabañas?</summary>
+      <p>Parrilla, hogar a leña, cocina con horno y 4 hornallas, microondas, TV 32&#39;&#39; y Wi-Fi.</p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Cómo reservo?</summary>
+      <p>Por <a href="https://api.whatsapp.com/send?phone=5492235365385&text=Hola!%20Quiero%20reservar%20en%20Puerto%20Delf%C3%ADn.%20%C2%BFTienen%20disponibilidad%20para%20mis%20fechas?" target="_blank" rel="noopener">WhatsApp</a>, directo con nosotros y sin intermediarios. Respondemos en menos de 1 hora.</p>
+    </details>
+  </div>
+</section>
+
+<!-- ⑦ UBICACIÓN -->
 <section class="ubicacion" id="ubicacion">
   <div class="ubic-left">
     <span class="lbl">ubicación</span>
@@ -668,7 +852,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
   </div>
 </section>
 
-<!-- ⑦ CTA FINAL -->
+<!-- ⑧ CTA FINAL -->
 <section class="cta-final">
   <div class="cta-inner">
     <span class="cta-tag r">reservá directo · sin intermediarios · precio más bajo</span>
@@ -695,6 +879,7 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
     <a href="#cabanas">Cabañas</a>
     <a href="#galeria">Galería</a>
     <a href="#opiniones">Opiniones</a>
+    <a href="#preguntas">Preguntas</a>
     <a href="#ubicacion">Ubicación</a>
     <a href="mailto:info@puertodelfin.com">Email</a>
   </nav>
