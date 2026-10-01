@@ -265,11 +265,11 @@ img { display: block; width: 100%; height: 100%; object-fit: cover; }
   transition: all 0.4s;
 }
 #nav.solid { background: rgba(253,251,248,0.97); padding: 14px 48px; border-bottom: 1px solid var(--sep); backdrop-filter: blur(10px); }
-.nav-brand { display: flex; align-items: center; gap: 10px; font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: #fff; letter-spacing: 1.5px; text-decoration: none; transition: color 0.4s; }
-.nav-brand small { display: block; font-family: 'Inter', sans-serif; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.6; margin-top: 2px; font-weight: 300; }
+.nav-brand { display: flex; align-items: center; gap: 12px; font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: #fff; letter-spacing: 1.5px; text-decoration: none; transition: color 0.4s; }
+.nav-brand small { display: block; font-family: 'Inter', sans-serif; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; opacity: 0.6; margin-top: 2px; font-weight: 300; }
 #nav.solid .nav-brand { color: var(--az2); }
 .brand-logo { flex-shrink: 0; background-color: currentColor; -webkit-mask: url(assets/logo.svg) center/contain no-repeat; mask: url(assets/logo.svg) center/contain no-repeat; }
-.nav-brand .brand-logo { width: 48px; height: 35px; }
+.nav-brand .brand-logo { width: 65px; height: 48px; }
 #nav.solid .brand-logo { color: var(--az); }
 .nav-links { display: flex; gap: 32px; list-style: none; align-items: center; }
 .nav-links a { color: rgba(255,255,255,0.78); text-decoration: none; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; transition: color 0.2s; }
@@ -498,12 +498,14 @@ footer { background: var(--t); padding: 40px 56px; display: flex; justify-conten
 
 /* NAV compacto entre 900 y 1100px (6 ítems) */
 @media(max-width:1100px){ .nav-links{gap:22px;} }
+/* desktop angosto: marca al tamaño compacto para no pisar los links */
+@media(min-width:901px) and (max-width:1000px){ .nav-brand{font-size:18px;gap:10px;} .nav-brand small{font-size:9px;} .nav-brand .brand-logo{width:48px;height:35px;} }
 @media(max-width:340px){ .nav-brand .nav-txt{display:none;} }
 
 /* MOBILE */
 @media(max-width:900px){
   #nav{padding:16px 20px;} #nav.solid{padding:12px 20px;}
-  .nav-brand .brand-logo{width:40px;height:29px;}
+  .nav-brand .brand-logo{width:54px;height:40px;}
   .nav-toggle{display:block;}
   .nav-links{
     position:fixed; top:0; right:0; height:100vh; width:78%; max-width:320px;
